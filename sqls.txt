@@ -1,0 +1,11 @@
+CREATE TABLE `RBT`.`address` ( `address_id` INT NOT NULL AUTO_INCREMENT , `address1` VARCHAR(20) NOT NULL , `address2` VARCHAR(20) NOT NULL , `pincode` INT(6) NOT NULL , `contact_person` VARCHAR(20) NOT NULL , `contact_number` INT(11) NOT NULL , PRIMARY KEY (`address_id`)) ENGINE = InnoDB;
+
+CREATE TABLE `rbt`.`residency_details` ( `residency_details_id` INT NOT NULL AUTO_INCREMENT , `bed_rooms` VARCHAR(4) NOT NULL , `bath_rooms` INT NOT NULL , `area` FLOAT NOT NULL , `furnish_status` TINYINT NOT NULL , `amenities` VARCHAR(20) NOT NULL , `parking` VARCHAR(20) NOT NULL , PRIMARY KEY (`residency_details_id`)) ENGINE = InnoDB;
+
+CREATE TABLE `rbt`.`residency` ( `residency_id` INT NOT NULL AUTO_INCREMENT , `type` VARCHAR(1) NOT NULL , `address_id` INT NOT NULL , `residency_details_id` INT NOT NULL , `price` FLOAT NOT NULL , `deposit` FLOAT NOT NULL , `preferred_tenant` VARCHAR(1) NOT NULL , `negotiable` BOOLEAN NOT NULL , `rented` BOOLEAN NOT NULL , PRIMARY KEY (`residency_id`)) ENGINE = InnoDB;
+
+ALTER TABLE `residency` CHANGE `type` `type` VARCHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'flat = \'F\', hostel=\'H\', pg=\'P\'';
+
+ALTER TABLE `residency` ADD CONSTRAINT `foreign_key1` FOREIGN KEY (`address_id`) REFERENCES `address`(`address_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `residency` ADD CONSTRAINT `foreign_key2` FOREIGN KEY (`residency_details_id`) REFERENCES `residency_details`(`residency_details_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
